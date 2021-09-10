@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: inventory-api:dev
+    container_name: inventory-api
+    command: ["/start-reload.sh"]
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/app
+    env_file:
+      - ./.env
+    environment:
+      LOG_LEVEL: debug
+
+  db:
+    image: postgres:13.1-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - database-content:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+    environment:
+      TZ: "Asia/Taipei"
+      PGTZ: "Asia/Taipei"
+
+  adminer-4.7:
+    image: adminer:4.7
+    container_name: adminer-4.7
+    restart: always
+    ports:
+      - 33033:8080
+
+volumes:
+  database-content:
