@@ -5,6 +5,7 @@ from sqlalchemy.orm import relationship
 from .db import Base
 from .helpers.sqlalchemy.utcnow import utcnow
 
+
 class Product(Base):
     __tablename__ = "products"
 

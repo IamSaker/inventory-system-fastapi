@@ -22,7 +22,7 @@ async def get_all_products(id: int, db: Session = Depends(get_db)) -> Order:
 @version(1)
 async def get_all_products(db: Session = Depends(get_db)) -> List[Order]:
     return crud_order.get_orders(db)
-  
+
 
 @router.post("/orders", status_code=status.HTTP_201_CREATED)
 @version(1)
